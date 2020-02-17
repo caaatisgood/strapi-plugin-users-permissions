@@ -7,6 +7,7 @@
 // Public node modules.
 const _ = require('lodash');
 const request = require('request');
+const jwt = require('jsonwebtoken');
 
 // Purest strategies.
 const purest = require('purest')({ request });
@@ -357,6 +358,37 @@ const getProfile = async (provider, query, callback) => {
             });
           }
         });
+      break;
+    }
+    case 'line': {
+      request.post(
+        {
+          url: 'https://api.line.me/oauth2/v2.1/token',
+          form: {
+            grant_type: 'authorization_code',
+            code: access_token,
+            redirect_uri: grant.line.redirect_uri,
+            client_id: grant.line.key,
+            client_secret: grant.line.secret,
+          },
+        },
+        (err, res, body) => {
+          if (err) {
+            callback(err)
+          } else {
+            jwt.verify(body.id_token, grant.line.secret, (err, decoded) => {
+              if (err) {
+                callback(err)
+              } else {
+                callback({
+                  username: decoded.payload.sub,
+                  email: decoded.payload.email,
+                })
+              }
+            })
+          }
+        }
+      )
       break;
     }
     default:

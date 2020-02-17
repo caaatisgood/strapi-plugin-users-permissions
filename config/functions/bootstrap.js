@@ -97,6 +97,14 @@ module.exports = async () => {
       callback: '/auth/vk/callback',
       scope: ['email'],
     },
+    line: {
+      enabled: false,
+      icon: 'line',
+      key: '',
+      secret: '',
+      redirect_uri: '/auth/line/callback',
+      scope: ['profile', 'openid', 'email'],
+    }
   };
   const prevGrantConfig = (await pluginStore.get({ key: 'grant' })) || {};
   // store grant auth config to db
