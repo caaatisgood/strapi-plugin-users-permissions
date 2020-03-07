@@ -102,7 +102,7 @@ module.exports = async () => {
       icon: 'line',
       key: '',
       secret: '',
-      redirect_uri: '/auth/line/callback',
+      callback: '/auth/line/callback',
       scope: ['profile', 'openid', 'email'],
       state: Math.random().toString(32).substr(2, 7),
     }

@@ -367,7 +367,7 @@ const getProfile = async (provider, query, callback) => {
           form: {
             grant_type: 'authorization_code',
             code: access_token,
-            redirect_uri: grant.line.redirect_uri,
+            redirect_uri: grant.line.callback,
             client_id: grant.line.key,
             client_secret: grant.line.secret,
           },

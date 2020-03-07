@@ -65,7 +65,6 @@ class PopUpForm extends React.Component {
       case 'google':
         return `${strapi.backendURL}/connect/google/callback`;
       case 'github':
-      case 'line':
         return get(this.props.values, 'redirect_uri', '');
       case 'microsoft':
         return `${strapi.backendURL}/connect/microsoft/callback`;
@@ -75,6 +74,8 @@ class PopUpForm extends React.Component {
         return `${strapi.backendURL}/connect/instagram/callback`;
       case 'vk':
         return `${strapi.backendURL}/connect/vk/callback`;
+      case 'line':
+        return `${strapi.backendURL}/connect/line/callback`;
       default: {
         const value = get(this.props.values, 'callback', '');
 
