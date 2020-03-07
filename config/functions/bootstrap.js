@@ -104,6 +104,7 @@ module.exports = async () => {
       secret: '',
       redirect_uri: '/auth/line/callback',
       scope: ['profile', 'openid', 'email'],
+      state: Math.random().toString(32).substr(2, 7),
     }
   };
   const prevGrantConfig = (await pluginStore.get({ key: 'grant' })) || {};
